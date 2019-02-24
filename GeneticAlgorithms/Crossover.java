@@ -1,7 +1,7 @@
 package GeneticAlgorithms;
 
 import GeneticObjects.Chromosome;
-import GeneticObjects.City;
+import GeneticObjects.Node;
 import GeneticObjects.Population;
 
 import java.util.*;
@@ -26,17 +26,17 @@ class Crossover {
      */
     static ArrayList<Chromosome> uniformOrder (Chromosome p1, Chromosome p2, Random r) {
 
-        City[] parent1 = p1.getArray();
-        City[] parent2 = p2.getArray();
+        Node[] parent1 = p1.getArray();
+        Node[] parent2 = p2.getArray();
 
-        City[] child1 = new City[parent1.length];
-        City[] child2 = new City[parent2.length];
+        Node[] child1 = new Node[parent1.length];
+        Node[] child2 = new Node[parent2.length];
 
-        HashSet<City> citiesInChild1 = new HashSet<>();
-        HashSet<City> citiesInChild2 = new HashSet<>();
+        HashSet<Node> citiesInChild1 = new HashSet<>();
+        HashSet<Node> citiesInChild2 = new HashSet<>();
 
-        ArrayList<City> citiesNotInChild1 = new ArrayList<>();
-        ArrayList<City> citiesNotInChild2 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild1 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild2 = new ArrayList<>();
 
         ArrayList<Chromosome> children = new ArrayList<>();
 
@@ -116,17 +116,17 @@ class Crossover {
      * @return      the children
      */
     static ArrayList<Chromosome> onePointCrossover (Chromosome p1, Chromosome p2, Random r) {
-        City[] parent1 = p1.getArray();
-        City[] parent2 = p2.getArray();
+        Node[] parent1 = p1.getArray();
+        Node[] parent2 = p2.getArray();
 
-        City[] child1 = new City[parent1.length];
-        City[] child2 = new City[parent2.length];
+        Node[] child1 = new Node[parent1.length];
+        Node[] child2 = new Node[parent2.length];
 
-        HashSet<City> citiesInChild1 = new HashSet<>();
-        HashSet<City> citiesInChild2 = new HashSet<>();
+        HashSet<Node> citiesInChild1 = new HashSet<>();
+        HashSet<Node> citiesInChild2 = new HashSet<>();
 
-        ArrayList<City> citiesNotInChild1 = new ArrayList<>();
-        ArrayList<City> citiesNotInChild2 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild1 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild2 = new ArrayList<>();
 
         ArrayList<Chromosome> children = new ArrayList<>();
         int totalCities = parent1.length;
@@ -176,10 +176,10 @@ class Crossover {
         }
 
         // Fill in the empty spots.
-        for (City city : citiesNotInChild1) {
+        for (Node city : citiesNotInChild1) {
             child1[emptySpotsC1.remove(0)] = city;
         }
-        for (City city : citiesNotInChild2) {
+        for (Node city : citiesNotInChild2) {
             child2[emptySpotsC2.remove(0)] = city;
         }
 
@@ -199,17 +199,17 @@ class Crossover {
      * @return      the children
      */
     static ArrayList<Chromosome> orderCrossover (Chromosome p1, Chromosome p2, Random r) {
-        City[] parent1 = p1.getArray();
-        City[] parent2 = p2.getArray();
+        Node[] parent1 = p1.getArray();
+        Node[] parent2 = p2.getArray();
 
-        City[] child1 = new City[parent1.length];
-        City[] child2 = new City[parent2.length];
+        Node[] child1 = new Node[parent1.length];
+        Node[] child2 = new Node[parent2.length];
 
-        HashSet<City> citiesInChild1 = new HashSet<>();
-        HashSet<City> citiesInChild2 = new HashSet<>();
+        HashSet<Node> citiesInChild1 = new HashSet<>();
+        HashSet<Node> citiesInChild2 = new HashSet<>();
 
-        ArrayList<City> citiesNotInChild1 = new ArrayList<>();
-        ArrayList<City> citiesNotInChild2 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild1 = new ArrayList<>();
+        ArrayList<Node> citiesNotInChild2 = new ArrayList<>();
 
         ArrayList<Chromosome> children = new ArrayList<>();
         int totalCities = parent1.length;
@@ -266,10 +266,10 @@ class Crossover {
         }
 
         // Fill in the empty spots.
-        for (City city : citiesNotInChild1) {
+        for (Node city : citiesNotInChild1) {
             child1[emptySpotsC1.remove(0)] = city;
         }
-        for (City city : citiesNotInChild2) {
+        for (Node city : citiesNotInChild2) {
             child2[emptySpotsC2.remove(0)] = city;
         }
 

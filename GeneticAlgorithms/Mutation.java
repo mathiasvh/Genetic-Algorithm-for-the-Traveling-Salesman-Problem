@@ -1,7 +1,7 @@
 package GeneticAlgorithms;
 
 import GeneticObjects.Chromosome;
-import GeneticObjects.City;
+import GeneticObjects.Node;
 
 import java.util.Random;
 
@@ -23,18 +23,18 @@ class Mutation {
      * @return              the mutated Chromosome
      */
     static Chromosome insertion (Chromosome chromosome, Random random) {
-        City[] cities = chromosome.getArray();
+        Node[] cities = chromosome.getArray();
         int randomIndex = random.nextInt(cities.length);
         int randomDestination = random.nextInt(cities.length);
 
         if (randomIndex < randomDestination) {
-            City temp = cities[randomIndex];
+            Node temp = cities[randomIndex];
             for (int i = randomIndex; i < randomDestination; i++) {
                 cities[i] = cities[i+1];
             }
             cities[randomDestination] = temp;
         } else {
-            City temp = cities[randomIndex];
+            Node temp = cities[randomIndex];
             for (int i = randomIndex; i > randomDestination; i--) {
                 cities[i] = cities[i-1];
             }
@@ -50,7 +50,7 @@ class Mutation {
      * @return              the mutated Chromosome
      */
     static Chromosome reciprocalExchange (Chromosome chromosome, Random random) {
-        City[] cities = chromosome.getArray();
+        Node[] cities = chromosome.getArray();
         int l = cities.length;
         swap(cities, random.nextInt(l), random.nextInt(l));
         return new Chromosome(cities);
@@ -71,7 +71,7 @@ class Mutation {
          * at indexes 8, 9, 1, and 2.
          */
 
-        City[] cities = chromosome.getArray();
+        Node[] cities = chromosome.getArray();
         int randomIndexStart = random.nextInt(cities.length);
         int randomIndexEnd = random.nextInt(cities.length);
 
@@ -89,8 +89,8 @@ class Mutation {
      * @param i         the index of the first City
      * @param j         the index of the second City
      */
-    private static void swap (City[] array, int i, int j) {
-        City temp = array[i];
+    private static void swap (Node[] array, int i, int j) {
+        Node temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }

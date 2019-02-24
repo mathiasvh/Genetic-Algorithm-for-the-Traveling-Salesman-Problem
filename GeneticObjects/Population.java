@@ -36,7 +36,7 @@ public class Population implements Iterable<Chromosome> {
         chromosomes.add(chromosome);
     }
 
-    public void populate (City[] cities, Random random) {
+    public void populate (Node[] cities, Random random) {
 
         if (chromosomes.size() == maxSize) {
             throw new BufferOverflowException();
@@ -82,7 +82,7 @@ public class Population implements Iterable<Chromosome> {
      * Get an array of all the Cities.
      * @return  the array of Cities
      */
-    public City[] getCities () {
+    public Node[] getCities () {
         return chromosomes.peek().getArray().clone();
     }
 
@@ -125,7 +125,7 @@ public class Population implements Iterable<Chromosome> {
     }
 
     public static Population fromDataSet (int popSize, DataSet dataSet, Random r) {
-        City[] cities = IO.Import.getCities(dataSet);
+        Node[] cities = IO.Import.getCities(dataSet);
         Population population = new Population(popSize);
         population.populate(cities, r);
         return population;
@@ -139,10 +139,10 @@ public class Population implements Iterable<Chromosome> {
      * @return              a randomly generated Population
      */
     public static Population getRandomPopulation(int numOfCities, int sizeOfPop, Random random) {
-        City[] cities = new City[numOfCities];
+        Node[] cities = new Node[numOfCities];
 
         for (int i = 0; i < numOfCities; i++) {
-            cities[i] = City.getRandomCity(random);
+            cities[i] = Node.getRandomNode(random);
         }
 
         Population population = new Population(sizeOfPop);

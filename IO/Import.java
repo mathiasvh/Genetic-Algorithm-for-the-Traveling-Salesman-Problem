@@ -1,6 +1,6 @@
 package IO;
 
-import GeneticObjects.City;
+import GeneticObjects.Node;
 
 import java.io.*;
 
@@ -14,7 +14,7 @@ public class Import {
      * @param dataSet   the data set to read
      * @return          the City objects contained within the data set
      */
-    public static City[] getCities (DataSet dataSet) {
+    public static Node[] getCities (DataSet dataSet) {
 
         String dataSetName;
         int startingLine;
@@ -28,17 +28,17 @@ public class Import {
             startingLine = 6;
         }
 
-        String[] lines = read(dataSetName).split("\n");
+        String[] lines = read(dataSetName).split("\\r?\\n");
         String[] words = lines[3].split(" ");
         int numOfCities = Integer.parseInt(words[words.length-1]);
-        City[] cities = new City[numOfCities];
+        Node[] cities = new Node[numOfCities];
 
         // Read each line and turn it into a City.
         for (int i = startingLine; i < startingLine+numOfCities; i++) {
             String[] line = removeWhiteSpace(lines[i]).trim().split(" ");
             int x = (int)Double.parseDouble(line[1].trim());
             int y = (int)Double.parseDouble(line[2].trim());
-            City city = new City(line[0], x, y);
+            Node city = new Node(line[0], x, y);
             cities[i-startingLine] = city;
         }
 

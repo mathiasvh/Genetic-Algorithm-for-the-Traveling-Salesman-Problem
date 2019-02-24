@@ -3,7 +3,7 @@ package GeneticAlgorithms;
 import Display.WindowGraph;
 import Display.WindowTSP;
 import GeneticObjects.Chromosome;
-import GeneticObjects.City;
+import GeneticObjects.Node;
 import GeneticObjects.Population;
 
 import java.util.ArrayList;
@@ -367,13 +367,13 @@ public class GeneticAlgorithm {
     private Chromosome performLocalSearch (Chromosome chromosome) {
 
         int bestDistance = chromosome.getDistance();
-        City[] array = chromosome.getArray();
-        City[] bestArray = array.clone();
+        Node[] array = chromosome.getArray();
+        Node[] bestArray = array.clone();
 
         for (int i = 0; i < array.length-1; i++) {
             for (int k = i+1; k < array.length; k++) {
 
-                City[] temp = array.clone();
+                Node[] temp = array.clone();
 
                 // Reverse order from i to k.
                 for (int j = i; j <= (i+k)/2; j++) {
@@ -400,8 +400,8 @@ public class GeneticAlgorithm {
      * @param i         the index of the first City
      * @param j         the index of the second City
      */
-    private static void swap (City[] array, int i, int j) {
-        City temp = array[i];
+    private static void swap (Node[] array, int i, int j) {
+        Node temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }

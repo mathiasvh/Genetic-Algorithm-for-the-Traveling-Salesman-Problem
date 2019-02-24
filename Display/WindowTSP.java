@@ -1,7 +1,7 @@
 package Display;
 
 import GeneticObjects.Chromosome;
-import GeneticObjects.City;
+import GeneticObjects.Node;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class WindowTSP extends JFrame {
     private static final int CITY_SIZE = 6;
 
     private Panel panel;
-    private City[] cities;
+    private Node[] cities;
     private Chromosome chromosome;
     private int maxX, maxY;
     private double scaleX, scaleY;
@@ -26,7 +26,7 @@ public class WindowTSP extends JFrame {
      * Construct the WindowTSP and draw the cities to the screen.
      * @param cities    the cities to draw to the screen
      */
-    public WindowTSP(City[] cities) {
+    public WindowTSP(Node[] cities) {
         this.cities = cities;
         setScale();
         panel = createPanel();
@@ -68,7 +68,7 @@ public class WindowTSP extends JFrame {
      * are drawn inside the window.
      */
     private void setScale () {
-        for (City c : cities) {
+        for (Node c : cities) {
             if (c.getX() > maxX) {
                 maxX = c.getX();
             }
@@ -103,7 +103,7 @@ public class WindowTSP extends JFrame {
         private void paintChromosome (Graphics2D graphics) {
 
             graphics.setColor(Color.darkGray);
-            City[] array = chromosome.getArray();
+            Node[] array = chromosome.getArray();
 
             for (int i = 1; i < array.length; i++) {
                 int x1 = (int)(array[i-1].getX() / scaleX + OFFSET / 2);
@@ -123,7 +123,7 @@ public class WindowTSP extends JFrame {
 
         private void paintCities (Graphics2D graphics) {
             graphics.setColor(Color.darkGray);
-            for (City c : cities) {
+            for (Node c : cities) {
                 int x = (int)((c.getX()) / scaleX - CITY_SIZE/2 + OFFSET / 2);
                 int y = (int)((c.getY()) / scaleY - CITY_SIZE/2 + OFFSET / 2);
                 graphics.fillOval(x, y, CITY_SIZE, CITY_SIZE);
@@ -132,7 +132,7 @@ public class WindowTSP extends JFrame {
 
         private void paintCityNames (Graphics2D graphics) {
             graphics.setColor(new Color(200, 200, 200));
-            for (City c : cities) {
+            for (Node c : cities) {
                 int x = (int)((c.getX()) / scaleX - CITY_SIZE/2 + OFFSET/2);
                 int y = (int)((c.getY()) / scaleY - CITY_SIZE/2 + OFFSET/2);
                 graphics.fillOval(x, y, CITY_SIZE, CITY_SIZE);

@@ -4,30 +4,30 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Contains an array of City objects which represents a path through the cities.
+ * Contains an array of Node objects which represents a path through the cities.
  */
 public class Chromosome implements Comparable<Chromosome> {
 
-    private City[] cities;
+    private Node[] nodes;
     private int distance = -1; // Calculated once then cached.
     private Random random;
 
     /**
-     * Construct the Chromosome from an array. The cities are in the same order
+     * Construct the Chromosome from an array. The nodes are in the same order
      * as they are in the array. No shuffling is done.
-     * @param cities    the array of City objects for construction
+     * @param nodes    the array of Node objects for construction
      */
-    public Chromosome (City[] cities) {
-        this.cities = cities.clone();
+    public Chromosome (Node[] nodes) {
+        this.nodes = nodes.clone();
     }
 
     /**
-     * Construct the Chromosome from an array of City objects and shuffle them.
-     * @param cities    the array of City objects for construction
+     * Construct the Chromosome from an array of Node objects and shuffle them.
+     * @param nodes    the array of Node objects for construction
      * @param random    the Random object for shuffling the Chromosome
      */
-    public Chromosome (City[] cities, Random random) {
-        this.cities = cities.clone();
+    public Chromosome (Node[] nodes, Random random) {
+        this.nodes = nodes.clone();
         this.random = random;
         shuffle();
     }
@@ -36,24 +36,24 @@ public class Chromosome implements Comparable<Chromosome> {
      * Shuffles the cities in the Chromosome.
      */
     private void shuffle () {
-        for (int i = 0; i < cities.length; i++) {
-            swap(i, random.nextInt(cities.length));
+        for (int i = 0; i < nodes.length; i++) {
+            swap(i, random.nextInt(nodes.length));
         }
     }
 
     /**
-     * Helper method for shuffling the cities. Swaps two cities.
-     * @param i     the index of the first city
-     * @param j     the index of the second city
+     * Helper method for shuffling the nodes. Swaps two nodes.
+     * @param i     the index of the first node
+     * @param j     the index of the second node
      */
     private void swap (int i, int j) {
-        City temp = cities[i];
-        cities[i] = cities[j];
-        cities[j] = temp;
+        Node temp = nodes[i];
+        nodes[i] = nodes[j];
+        nodes[j] = temp;
     }
 
-    public City[] getArray () {
-        return cities.clone();
+    public Node[] getArray () {
+        return nodes.clone();
     }
 
     @Override
@@ -64,8 +64,8 @@ public class Chromosome implements Comparable<Chromosome> {
     @Override
     public int hashCode() {
         StringBuilder sb = new StringBuilder();
-        for (City city : cities) {
-            sb.append(city);
+        for (Node node : nodes) {
+            sb.append(node);
         }
         return (new String(sb)).hashCode();
     }
@@ -79,11 +79,11 @@ public class Chromosome implements Comparable<Chromosome> {
 
        double distanceTravelled = 0;
 
-        for (int i = 1; i < cities.length; i++) {
-            distanceTravelled += City.distance(cities[i-1], cities[i]);
+        for (int i = 1; i < nodes.length; i++) {
+            distanceTravelled += Node.distance(nodes[i-1], nodes[i]);
         }
 
-        distanceTravelled += City.distance(cities[cities.length-1], cities[0]);
+        distanceTravelled += Node.distance(nodes[nodes.length-1], nodes[0]);
         this.distance = (int)distanceTravelled;
         return distance;
     }
@@ -96,13 +96,13 @@ public class Chromosome implements Comparable<Chromosome> {
 
         Chromosome c = (Chromosome) o;
 
-        return Arrays.equals(c.cities, cities);
+        return Arrays.equals(c.nodes, nodes);
     }
 
     @Override
     public String toString () {
         StringBuilder sb = new StringBuilder("[ ");
-        for (City item : cities) {
+        for (Node item : nodes) {
             sb.append(item.getName());
             sb.append(" ");
         }
